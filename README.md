@@ -5,6 +5,12 @@ Docular!
 
 Feel free to fork it on [Github](https://github.com/danielking/docular)!
 
+Screenshots
+-----------
+![edit](https://raw.github.com/danielking/docular/master/screenshots/docular_win_edit.png)
+
+![preview](https://raw.github.com/danielking/docular/master/screenshots/docular_win_preview.png)
+
 How to make it work?
 -----------
 1. Get [node-webkit](https://github.com/rogerwang/node-webkit) and [nw-gyp](https://github.com/rogerwang/nw-gyp)
