@@ -1,12 +1,12 @@
 Sequelize = require 'sequelize'
 marked = require 'marked'
-path = require 'path'
 async = require 'async'
+path = require 'path'
 gui = require 'nw.gui'
 
 new_document_title = 'New Doc'
-
-appPath = path.dirname process.execPath
+alert process.cwd()
+appPath = process.cwd()
 db = new Sequelize 'db', null, null,
 	dialect: 'sqlite'
 	storage: path.join appPath, 'documents.db'
