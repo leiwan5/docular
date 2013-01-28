@@ -5,7 +5,7 @@ path = require 'path'
 gui = require 'nw.gui'
 
 new_document_title = 'New Doc'
-alert process.cwd()
+
 appPath = process.cwd()
 db = new Sequelize 'db', null, null,
 	dialect: 'sqlite'
@@ -31,31 +31,53 @@ app.controller 'app', ($scope) ->
 	editor.getSession().setMode 'ace/mode/markdown'
 
 	$scope.documents = []
-	# $scope.previewDocument = ''
+	$scope.editing = 
+		dirty: false
+		content: ''
+		doc: null
 
 	reloadDocuments = ->
 		Document.findAll(order: 'createdAt DESC').success (documents) ->
 			$scope.documents = documents
 			$scope.$digest()
 
+	openDocument = (doc, reopen) ->
+		if doc and doc.id and reopen
+			Document.find(doc.id).success((_doc) ->
+					openDocument _doc
+				)
+		else
+			$scope.previewMode = false
+			$scope.editing.dirty = false
+			$scope.editing.content = doc.content
+			$scope.editing.doc = doc
+			editor.setValue doc.content
+			editor.clearSelection()
+			localStorage['editing_id'] = doc.id
+			process.nextTick ->
+				$scope.$digest()
+
+
 	$scope.selectDocument = (doc) ->
 		if doc
 			if $scope.deleteMode
 				doc.checked = !doc.checked
 			else
-				$scope.previewMode = false
-				$scope.editing = null
-				$scope.editing = doc
-				editor.setValue doc.content
-				editor.clearSelection()
 				$('#doc-selector').modal 'hide'
-				localStorage['editing_id'] = doc.id
-				process.nextTick ->
-					$scope.$digest()
+				if $scope.editing.dirty
+					bootbox.dialog 'Your document isn\'t saved!', [
+							{label: 'Discard', class: 'btn-danger', callback: -> openDocument doc},
+							{label: 'Save', callback: -> $scope.saveDocument(-> openDocument(doc, true))},
+							{label: 'Cancel'}
+						]
+				else
+					openDocument doc
+
 		else
 			reloadDocuments()
 			$scope.previewMode = false
 			$('#doc-selector').modal 'show'
+
 
 	$scope.setProperties = () ->
 		$('#doc-properties').modal 'show'
@@ -67,13 +89,18 @@ app.controller 'app', ($scope) ->
 		doc = Document.build title: new_document_title
 		$scope.selectDocument doc
 			
-	$scope.saveDocument = () ->
-		if errors = $scope.editing.validate()
-			toastr.error errors.title
-		else
-			$scope.editing.save().success (doc) ->
-				localStorage['editing_id'] = doc.id
-				toastr.success 'Document saved!'
+	$scope.saveDocument = (cb) ->
+		if $scope.editing.doc
+			$scope.editing.doc.content = $scope.editing.content
+			if errors = $scope.editing.doc.validate()
+				toastr.error errors.title
+			else
+				$scope.editing.doc.save().success (doc) ->
+					$scope.editing.dirty = false
+					$scope.$digest()
+					localStorage['editing_id'] = doc.id
+					toastr.success 'Document saved!'
+					cb() if cb
 
 	$scope.enterDeleteMode = ->
 		$scope.deleteMode = !$scope.deleteMode
@@ -102,8 +129,25 @@ app.controller 'app', ($scope) ->
 						reloadDocuments()
 						console.log $scope.documents
 
+	$scope.export = () ->
+		toastr.error 'Not implemented!'
+
+	$scope.syncToGist = () ->
+		toastr.error 'Not implemented!'
+
+	$scope.exit = () ->
+		if $scope.editing.dirty
+			bootbox.confirm 'Are you sure? Your document is not saved!', (sure) ->
+				if sure
+					gui.App.closeAllWindows()
+		else
+			gui.App.closeAllWindows()
+
 	editor.on 'change', () ->
-		$scope.editing.content = editor.getValue()
+		process.nextTick ->
+			$scope.editing.dirty = ($scope.editing.doc.content != editor.getValue())
+			$scope.editing.content = editor.getValue()
+			$scope.$digest()
 
 	$scope.$watch 'previewMode', (previewMode) ->
 		if previewMode
@@ -114,17 +158,14 @@ app.controller 'app', ($scope) ->
 
 	id = parseInt localStorage['editing_id']
 	newDoc = Document.build title: new_document_title
-	process.nextTick ->
-		unless isNaN id
-			Document.find(localStorage['editing_id']).success((doc) ->
-					$scope.selectDocument doc || newDoc
-					$scope.$digest()
-				).failure ->
-					$scope.selectDocument newDoc
-					$scope.$digest()
-		else
-			$scope.selectDocument newDoc
-			$scope.$digest()
+
+	unless isNaN id
+		Document.find(localStorage['editing_id']).success((doc) ->
+				openDocument doc || newDoc
+			).failure ->
+				openDocument newDoc
+	else
+		openDocument newDoc
 
 $ ->
 	db.sync().success ->

@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/google-bootstrap.css">
     <link rel="stylesheet" href="css/toastr.min.css">
+    <link rel="stylesheet" href="css/icons/style.css">
     <script src="js/libs/jquery-1.8.3.min.js"></script>
     <script src="js/libs/toastr.min.js"></script>
     <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/bootbox.min.js"></script>
     <script src="js/libs/coffee-script.js"></script>
     <script src="js/libs/angular.min.js"></script>
     <script src="js/libs/ace/ace.js"></script>
@@ -20,12 +22,39 @@
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <span ng-cloak href="#" class="document-title pull-right" ng-click="setProperties()">{{editing.title}}</span>
+      <div class="navbar-inner" ng-cloak>
+        <ul class="nav">
+          <li>
+            <a class="dropdown-toggle document-title" data-toggle="dropdown" href="#" ng-click="setProperties()">
+              {{editing.doc.title}}
+              <span ng-show="editing.dirty">*</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-reorder"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#" ng-click="export()"><i class="icon-share"></i> Export</a>
+              </li>
+              <li>
+                <a href="#" ng-click="syncToGist()"><i class="icon-github"></i> Sync to Gist</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#" ng-click="exit()"><i class="icon-exit"></i> Exit</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
         <ul class="nav">
           <li><a href="#" ng-click="selectDocument()"><i class="icon-folder-open"></i> Documents</a></li>
-          <li><a href="#" ng-click="saveDocument()"><i class="icon-ok-circle"></i> Save</a></li>
-          <li ng-class="previewMode && 'active' || ''"><a href="#" ng-click="preview()"><i class="icon-eye-open"></i> Preview</a></li>
+          <li ng-class="previewMode && 'active' || ''"><a href="#" ng-click="preview()"><i class="icon-eye"></i> Preview</a></li>
+          <li ng-show="editing.dirty"><a href="#" ng-click="saveDocument()"><i class="icon-disk"></i> Save</a></li>
         </ul>
 <!--         <ul class="nav pull-right">
           <li><a href="#"><i class="icon-align-left"></i> Outline</a></li>
