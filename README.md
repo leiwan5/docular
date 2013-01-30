@@ -13,6 +13,8 @@ Screenshots
 
 ![preview](https://raw.github.com/danielking/docular/master/screenshots/docular_win_preview.png)
 
+![preview](https://raw.github.com/danielking/docular/master/screenshots/docular_win_preview2.png)
+
 How to make it work?
 -----------
 1. Get [node-webkit](https://github.com/rogerwang/node-webkit) and [nw-gyp](https://github.com/rogerwang/nw-gyp)

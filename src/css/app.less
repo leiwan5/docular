@@ -38,23 +38,43 @@
 	color: #777;
 	text-shadow: 0 1px 0 white;
 }
-#editor, .preview {
+#editor, #preview {
 	position: absolute;
 	top: 30px;
 	left: 0;
 	right: 0;
 	bottom: 0;
 }
-.preview {
+#preview {
 	z-index: 1000;
 	background: #f3f3f3;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	& > .content {
+	& > .container {
+		width: auto;
 		background: white;
 		margin: 15px 25px;
 		padding: 20px;
 		box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+	}
+	.dock-btn {
+		visibility: hidden;
+	}
+
+	&:hover {
+		.dock-btn {
+			visibility: visible;
+		}
+	}
+}
+.preview-pane-docked {
+	#editor {
+		bottom: 50%;
+	}
+	#preview {
+		top: 50%;
+		box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
+		border-top: 1px solid #d4d4d4;
 	}
 }
 // #doc-selector {

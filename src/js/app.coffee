@@ -85,6 +85,9 @@ app.controller 'app', ($scope) ->
 	$scope.preview = () ->
 		$scope.previewMode = !$scope.previewMode
 
+	$scope.dockPreviewPane = () ->
+		$scope.previewPaneDocked = !$scope.previewPaneDocked
+
 	$scope.newDocument = () ->
 		doc = Document.build title: new_document_title
 		$scope.selectDocument doc
@@ -143,18 +146,20 @@ app.controller 'app', ($scope) ->
 		else
 			gui.App.closeAllWindows()
 
+	updatePreview = ->
+		try
+			doc = marked $scope.editing.content
+			$('#preview > .container > .content').html doc
+
 	editor.on 'change', () ->
 		process.nextTick ->
 			$scope.editing.dirty = ($scope.editing.doc.content != editor.getValue())
 			$scope.editing.content = editor.getValue()
 			$scope.$digest()
+			updatePreview() if $scope.previewMode and $scope.previewPaneDocked
 
 	$scope.$watch 'previewMode', (previewMode) ->
-		if previewMode
-			try
-				doc = marked $scope.editing.content
-				$('.preview > .content').html doc
-
+		updatePreview() if previewMode
 
 	id = parseInt localStorage['editing_id']
 	newDoc = Document.build title: new_document_title
@@ -171,7 +176,7 @@ $ ->
 	db.sync().success ->
 		angular.bootstrap $('html'), ['app']
 
-	$('.preview > .content').on 'click', 'a', ->
+	$('#preview > .container > .content').on 'click', 'a', ->
 		url = $(this).attr 'href'
 		gui.Shell.openExternal url if url
 		false

@@ -20,7 +20,7 @@
     <script type="text/coffeescript" src="js/app.coffee"></script>
     <script src="js/libs/less-1.3.1.min.js"></script>
   </head>
-  <body>
+  <body ng-cloak onMove="console.log(111)">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner" ng-cloak>
         <ul class="nav">
@@ -61,12 +61,17 @@
         </ul> -->
       </div>
     </div>
-    <div class="body">
+    <div class="body" ng-class="(previewPaneDocked && previewMode) && 'preview-pane-docked' || ''">
       <div ng-cloak class="editor">
         <div id="editor"></div>
       </div>
-      <div ng-cloak class="preview" ng-show="previewMode">
-        <div class="content" ng:bind-html="previewDocument"></div>
+      <div id="preview" ng-show="previewMode">
+        <div class="container" ng:bind-html="previewDocument">
+          <div class="content"></div>
+          <div class="btn dock-btn pull-right" ng-click="dockPreviewPane()">
+            {{previewPaneDocked && 'Undock' || 'Dock'}}
+          </div>
+        </div>
       </div>
 
       <div class="modal hide fade" id="doc-selector">
