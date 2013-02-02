@@ -27,6 +27,7 @@ toastr.options =
 	positionClass: 'toast-bottom-left'
 
 app.controller 'app', ($scope) ->
+	win = gui.Window.get()
 	editor = ace.edit 'editor'
 	editor.getSession().setMode 'ace/mode/markdown'
 
@@ -35,6 +36,7 @@ app.controller 'app', ($scope) ->
 		dirty: false
 		content: ''
 		doc: null
+	$scope.previewPaneDocked = true
 
 	reloadDocuments = ->
 		Document.findAll(order: 'createdAt DESC').success (documents) ->
@@ -160,6 +162,16 @@ app.controller 'app', ($scope) ->
 
 	$scope.$watch 'previewMode', (previewMode) ->
 		updatePreview() if previewMode
+		process.nextTick ->
+			editor.resize()
+	
+	$scope.$watch 'editing.doc.title', (title, oldTitle) ->
+		if title and title != oldTitle
+			$scope.editing.dirty = true
+
+	$scope.$watch 'editing.description', (description, oldDescription) ->
+		if description and description != oldDescription
+			$scope.editing.dirty = true
 
 	id = parseInt localStorage['editing_id']
 	newDoc = Document.build title: new_document_title

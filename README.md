@@ -7,13 +7,7 @@ Feel free to fork it on [Github](https://github.com/danielking/docular)!
 
 Screenshots
 -----------
-![edit](https://raw.github.com/danielking/docular/master/screenshots/docular_mac_edit.png)
-
-![edit](https://raw.github.com/danielking/docular/master/screenshots/docular_mac_preview.png)
-
-![preview](https://raw.github.com/danielking/docular/master/screenshots/docular_win_preview.png)
-
-![preview](https://raw.github.com/danielking/docular/master/screenshots/docular_win_preview2.png)
+![edit](https://raw.github.com/danielking/docular/master/screenshots/docular_win.png)
 
 How to make it work?
 -----------

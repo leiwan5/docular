@@ -62,13 +62,11 @@
       </div>
     </div>
     <div class="body" ng-class="(previewPaneDocked && previewMode) && 'preview-pane-docked' || ''">
-      <div ng-cloak class="editor">
-        <div id="editor"></div>
-      </div>
+      <div ng-cloak id="editor"></div>
       <div id="preview" ng-show="previewMode">
         <div class="container" ng:bind-html="previewDocument">
           <div class="content"></div>
-          <div class="btn dock-btn pull-right" ng-click="dockPreviewPane()">
+          <div class="hide" class="btn dock-btn pull-right" ng-click="dockPreviewPane()">
             {{previewPaneDocked && 'Undock' || 'Dock'}}
           </div>
         </div>
@@ -118,7 +116,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <div class="btn" data-dismiss="modal">Cancel</div>
+          <div class="btn hide" data-dismiss="modal">Cancel</div>
           <div class="btn btn-primary" data-dismiss="modal">Ok</div>
         </div>
       </div>
