@@ -110,7 +110,8 @@ app.controller 'app', ($scope) ->
 
 		else
 			reloadDocuments()
-			$scope.previewMode = false
+			unless $scope.previewPaneDocked
+				$scope.previewMode = false
 			$('#doc-selector').modal 'show'
 
 
