@@ -21,14 +21,22 @@ Document = db.define 'Document',
 	description: Sequelize.TEXT
 	content: Sequelize.TEXT
 
-
 window.app = angular.module 'app', []
 toastr.options = 
 	positionClass: 'toast-bottom-left'
 
 app.controller 'app', ($scope) ->
-	win = gui.Window.get()
-	editor = ace.edit 'editor'
+	$scope.win = gui.Window.get()
+	if localStorage['height']
+		$scope.win.height = localStorage['height']
+	if localStorage['width']
+		$scope.win.width = localStorage['width']
+	if localStorage['x']
+		$scope.win.x = localStorage['x']
+	if localStorage['y']
+		$scope.win.y = localStorage['y']
+
+	window.editor = ace.edit 'editor'
 	editor.getSession().setMode 'ace/mode/markdown'
 
 	$scope.documents = []
@@ -37,6 +45,31 @@ app.controller 'app', ($scope) ->
 		content: ''
 		doc: null
 	$scope.previewPaneDocked = true
+	$scope.themes = [
+		{name: 'github', label: 'Github'},
+		{name: 'textmate', label: 'Textmate'},
+		{name: 'dreamweaver', label: 'Dreamweaver'},
+		{name: 'monokai', label: 'Monokai'},
+		{name: 'vibrant_ink', label: 'Vibrant Ink'}
+	]
+	theme = if localStorage['theme']
+		res = $scope.themes.filter (t) -> t.name == localStorage['theme']
+		if res.length > 0 then res[0] else null
+	else
+		null
+	$scope.currentTheme = theme || $scope.themes[1]
+	$scope.currentFontSize = localStorage['font_size'] || 14
+	$scope.changeTheme = (theme) ->
+		editor.setTheme "ace/theme/#{theme.name}"
+		$scope.currentTheme = theme
+		localStorage['theme'] = theme.name
+	$scope.changeFontSize = (size) ->
+		editor.setFontSize "#{size}px"
+		$scope.currentFontSize = size
+		localStorage['font_size'] = size
+	$scope.changeTheme $scope.currentTheme
+	$scope.changeFontSize $scope.currentFontSize
+
 
 	reloadDocuments = ->
 		Document.findAll(order: 'createdAt DESC').success (documents) ->
@@ -173,6 +206,13 @@ app.controller 'app', ($scope) ->
 		if description and description != oldDescription
 			$scope.editing.dirty = true
 
+	$(window).on 'getwindowsize', ->
+		localStorage['height'] = $scope.win.height
+		localStorage['width'] = $scope.win.width
+		localStorage['x'] = $scope.win.x
+		localStorage['y'] = $scope.win.y
+
+
 	id = parseInt localStorage['editing_id']
 	newDoc = Document.build title: new_document_title
 
@@ -192,3 +232,10 @@ $ ->
 		url = $(this).attr 'href'
 		gui.Shell.openExternal url if url
 		false
+
+	$(window).on 'getwindowsize', ->
+		setTimeout ->
+				$(window).trigger 'getwindowsize'
+			, 500
+
+	$(window).trigger 'getwindowsize'

@@ -115,7 +115,16 @@
 		color: #bd362f;
 	}
 }
-
+.theme-menu-item {
+	i {
+		visibility: hidden;
+	}
+	&.active {
+		i {
+			visibility: visible;
+		}
+	}
+}
 #preview {
 	@import 'markdown';
 }

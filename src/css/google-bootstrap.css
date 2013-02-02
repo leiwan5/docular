@@ -389,7 +389,7 @@ select:focus:required:invalid:focus {
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .dropdown-submenu:hover > a > [class*=" icon-"] {
-  background-image: url("../img/glyphicons-halflings.png");
+  /*background-image: url("../img/glyphicons-halflings.png");*/
 }
 .dropdown-menu {
   position: absolute;
