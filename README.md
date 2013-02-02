@@ -6,7 +6,7 @@ Docular!
 Feel free to fork it on [Github](https://github.com/danielking/docular)!
 
 Downloads
-==========
+-----------
 http://pan.baidu.com/share/link?shareid=258992&uk=2452925507
 
 Screenshots
