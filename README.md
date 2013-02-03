@@ -11,7 +11,9 @@ http://pan.baidu.com/share/link?shareid=258992&uk=2452925507
 
 Screenshots
 -----------
-![mac](https://raw.github.com/danielking/docular/master/screenshots/docular_mac_themes.png)
+![mac](https://raw.github.com/danielking/docular/master/screenshots/docular_mac.png)
+
+![linux](https://raw.github.com/danielking/docular/master/screenshots/docular_linux.png)
 
 ![win](https://raw.github.com/danielking/docular/master/screenshots/docular_win.png)
 
