@@ -1,0 +1,15 @@
+{
+	"name": "Docular",
+	"main": "index.html",
+	"window": {
+		"frame": true,
+		"toolbar": true,
+		"icon": "icon.png",
+		"min_width": 600,
+		"min_height": 400,
+		"kiosk": false
+	},
+	"webkit": {
+		"plugin": true
+	}
+}
