@@ -1,2 +1,2 @@
 #!/bin/sh
-open -n -a node-webkit --no-toolbar src
+open -n -a node-webkit src

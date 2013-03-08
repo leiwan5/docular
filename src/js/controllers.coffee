@@ -2,7 +2,7 @@ window.app = window.app || angular.module 'app', ['$docular']
 
 app.controller 'app', ['$scope', ($scope) ->
 	$scope.appName = 'Docular!'
-	$scope.previewSize = 300
+	$scope.previewSize = 350
 	$scope.previewVisible = false
 	$scope.preview = ->
 		unless $scope.previewVisible
