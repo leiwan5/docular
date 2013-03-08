@@ -2,6 +2,7 @@
 	"name": "Docular",
 	"version": "0.1.0",
 	"devDependencies": {
+		"async": "*",
 		"grunt": "*",
 		"grunt-contrib-uglify": "*",
 		"grunt-contrib-watch": "*",

@@ -9,7 +9,7 @@ module.exports = (grunt) ->
 		coffee:
 			js:
 				files:
-					'src/js/app.js': ['src/js/models.coffee', 'src/js/controllers.coffee', 'src/js/app.coffee']
+					'src/js/app.js': ['src/js/directives.coffee', 'src/js/models.coffee', 'src/js/services.coffee', 'src/js/controllers.coffee', 'src/js/app.coffee']
 
 		less:
 			css:

@@ -6,10 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body ng-controller="app">
+	<div docular-editor id="editor"></div>
 
-	<div class="navbar navbar-inverses navbar-fixed-top">
+	<div class="navbar navbar-inverses navbar-static-top">
 		<div class="navbar-inner">
-			<a class="brand" href="./index.html">{{appName}}</a>
+			<a class="brand" href="#">{{appName}}</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active">
@@ -25,9 +26,13 @@
 			</div>
 		</div>
 	</div>
+
 	
 	<script src="js/libs/zepto.js"></script>
+	<script src="js/libs/underscore.js"></script>
 	<script src="js/libs/angular.js"></script>
+	<script src="js/libs/ace/ace.js"></script>
+    <script src="js/libs/ace/mode-markdown.js"></script>
 	<script src="js/app.js"></script>
 </body>
 </html>

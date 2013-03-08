@@ -1,6 +1,17 @@
 body {
   font-size: 12px;
 }
+.navbar {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 .navbar .brand {
-  padding-left: 40px;
+  padding-left: 20px;
+}
+#editor {
+  position: fixed;
+  top: 31px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }

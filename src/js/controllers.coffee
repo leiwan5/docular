@@ -1,4 +1,5 @@
-window.app = window.app || angular.module 'app', []
+window.app = window.app || angular.module 'app', ['$docular']
 
-app.controller 'app', ($scope) ->
+app.controller 'app', ['$scope', ($scope) ->
 	$scope.appName = 'Docular!'
+]
