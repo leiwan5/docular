@@ -5,29 +5,33 @@
 	<link rel="stylesheet" type="text/css" href="css/libs/todc-bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
-<body ng-controller="app">
-	<div docular-editor id="editor"></div>
+<body ng-controller="app" ng-cloak>
+	<!-- <div docular-editor id="editor"></div> -->
 
 	<div class="navbar navbar-inverses navbar-static-top">
 		<div class="navbar-inner">
-			<a class="brand" href="#">{{appName}}</a>
+			<a class="brand">{{appName}}</a>
 			<div class="nav-collapse collapse">
 				<ul class="nav">
-					<li class="active">
-						<a href="#">Open</a>
+					<li>
+						<a >Open</a>
 					</li>
 					<li class="">
-						<a href="#">Save</a>
+						<a >Save</a>
 					</li>
 					<li class="">
-						<a href="#">Preview</a>
+						<a ng-click="preview()">Preview</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	
+	<div docular-split-view class="main docular-split-view" data-mode="previewMode" data-second-size="previewSize" data-second-visible="previewVisible">
+		<div class="first" id="editor" docular-editor></div>
+		<div class="second" id="preview"></div>
+	</div>
+
 	<script src="js/libs/zepto.js"></script>
 	<script src="js/libs/underscore.js"></script>
 	<script src="js/libs/angular.js"></script>

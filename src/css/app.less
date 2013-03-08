@@ -1,17 +1,27 @@
 body {
 	font-size: 12px;
 }
+a {
+	cursor: default;
+}
 .navbar {
 	.brand {
 		padding-left: 20px;
 	}
-	box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.03);
 }
-#editor {
-	position: fixed;
+.main {
+	position: absolute;
 	top: 31px;
 	right: 0;
 	left: 0;
 	bottom: 0;
-	box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+	z-index: -1;
+	// box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
 }
+
+#preview {
+	@import 'markdown';
+}
+
+@import 'scrollbar';
