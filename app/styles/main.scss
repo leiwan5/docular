@@ -1,0 +1,42 @@
+@import "compass_twitter_bootstrap";
+@import "todc-bootstrap";
+
+.body {
+	position: absolute;
+	top: 30px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.navbar {
+	.navbar-inner {
+		padding-left: 5px;
+	}
+	.brand {
+		float: right;
+		margin-left: 20px;
+		padding-right: 0 !important;
+		padding-left: 0;
+		font-weight: bold;
+		color: #000;
+		text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+
+		@include transition(all .2s linear);
+
+		&:hover {
+			text-decoration: none;
+			text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+		}
+	}
+	.nav {
+		li {
+			a {
+				@include transition(all .05s linear);
+			}
+		}
+	}
+}
+
+.ace_editor { top: 0; bottom: 0; right: 0; left: 0; }
+.ace_editor_wrapper { position : absolute; top: 0; bottom: 0; right: 0; left: 0;}
