@@ -41,10 +41,13 @@
       <div class="editor">
         <div ui-ace scope-instance="editor"></div>
       </div>
+      <div class="preview" ng:bind-html="docHtml"></div>
     </div>
 
+    <script type="text/javascript" src="scripts/libs/marked.js"></script>
     <script type="text/javascript" src="components/ace-builds/src-min-noconflict/ace.js"></script>
     <script type="text/javascript" src="components/angular/angular.js"></script>
+    <script type="text/javascript" src="components/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="components/angular-ui-ace/ui-ace.js"></script>
 
     <!-- build:js(.tmp) scripts/scripts.js -->

@@ -3,7 +3,7 @@
 
 .body {
 	position: absolute;
-	top: 30px;
+	top: 31px;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -40,3 +40,61 @@
 
 .ace_editor { top: 0; bottom: 0; right: 0; left: 0; }
 .ace_editor_wrapper { position : absolute; top: 0; bottom: 0; right: 0; left: 0;}
+
+
+.editor, .preview {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+.editor {
+	right: 50%;
+}
+.preview {
+	left: 50%;
+}
+
+
+::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    background-color: #f3f3f3;
+    border: 0;
+    opacity: 0.3;
+    // border-left: 1px solid #dbdbdb;
+	&:hover {
+		background-color: #f6f6f6;
+	}
+}
+::-webkit-scrollbar:vertical {
+	border-left: 1px solid #dbdbdb;
+}
+::-webkit-scrollbar:horizontal {
+	border-top: 1px solid #dbdbdb;
+}
+::-webkit-scrollbar-button {
+	display: none;
+}
+::-webkit-scrollbar-thumb:vertical,
+::-webkit-scrollbar-thumb:horizontal {
+    opacity: 0.3;
+	display: block;
+    background-color: #c6c6c6;
+    border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border: solid transparent;
+    border-width: 0;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10), inset 0 -1px 0 rgba(0,0,0,0.07);
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #949494;
+}
+::-webkit-scrollbar-thumb:active{
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.35);
+}
