@@ -3,7 +3,6 @@
 angular.module('docularApp')
   .controller 'MainCtrl', ['$scope', ($scope) ->
     $scope.$watch 'docHtml', (docHtml) ->
-      console.log docHtml
 
     $scope.$watch 'editor', (editor) ->
       if editor

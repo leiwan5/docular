@@ -12,7 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body ng-controller="MainCtrl">
+  <body ng-controller="MainCtrl" ng-cloak>
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -29,10 +29,13 @@
         <a href="#" class="pull-right brand">Docular!</a>
         <ul class="nav" ng-show="editor">
           <li>
-            <a href="#">Open</a>
+            <a href="#">{{ '_open_' | i18n }}</a>
           </li>
           <li>
-            <a href="#">Save</a>
+            <a href="#">{{ '_save_' | i18n }}</a>
+          </li>
+          <li>
+            <a href="#">{{ '_preview_' | i18n }}</a>
           </li>
         </ul>
       </div>
@@ -41,7 +44,7 @@
       <div class="editor">
         <div ui-ace scope-instance="editor"></div>
       </div>
-      <div class="preview" ng-bind-html-unsafe="docHtml"></div>
+      <div class="preview markdown" ng-bind-html-unsafe="docHtml"></div>
     </div>
 
     <script type="text/javascript" src="scripts/libs/marked.js"></script>
@@ -54,6 +57,8 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/localDiskStore.js"></script>
+    <script src="scripts/locales/locales.js"></script>
+    <script src="scripts/filters/i18n.js"></script>
     <!-- endbuild -->
   </body>
 </html>
